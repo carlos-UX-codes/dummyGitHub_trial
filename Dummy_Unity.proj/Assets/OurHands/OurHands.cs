@@ -35,6 +35,34 @@ public class OurHands : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Change Animate position or re-initialize 
+        if (ourDevice.isValid)
+        {
+            UpdateOurHand();
+        }
+        else
+        {
+            InitializeOurHand();
+        }
     }
+    void UpdateOurHand()
+    {
+        if (ourDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+        {
+            Debug.Log("Trigger Value =" + triggerValue);
+        }
+        else
+        {
+            Debug.Log("TriggerValue not Active");
+        }
+        if (ourDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
+        {
+            Debug.Log("Grip Value =" + gripValue);
+        }
+        else
+        {
+            Debug.Log("Grip not Active");
+        }
+    }
+
 }
